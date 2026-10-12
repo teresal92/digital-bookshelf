@@ -1,0 +1,74 @@
+.shelves {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+/* Gap and height are set inline from the shelf metrics */
+.shelf__row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0 20px;
+}
+.shelf__plank {
+  height: 24px;
+  border-radius: 2px;
+  background-color: var(--shelf-top);
+  background-image: var(--texture-paper);
+  box-shadow: var(--shadow-shelf);
+}
+.shelf__underside {
+  height: 8px;
+  margin: 0 10px;
+  border-radius: 0 0 3px 3px;
+  background: var(--shelf-underside);
+}
+
+/* Dashed, spine-shaped "Add a book" slot at the start of the first shelf */
+.add-slot {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border: 1.5px dashed var(--slot-border);
+  border-radius: var(--radius-spine);
+  background: transparent;
+  color: var(--text-quiet);
+  cursor: pointer;
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    color 0.25s,
+    transform 0.4s var(--ease-paper);
+}
+@media (hover: hover) {
+  .add-slot:hover {
+    border-color: var(--action-secondary-hover-border);
+    background: var(--slot-hover-bg);
+    color: var(--text-secondary);
+    transform: translateY(var(--lift-slot-hover));
+  }
+}
+.add-slot__plus {
+  font: var(--weight-regular) var(--size-accent) / 1 var(--font-sans);
+}
+.add-slot__label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font: var(--weight-medium) var(--size-ui) var(--font-sans);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.shelves__empty {
+  padding: 80px 0;
+  text-align: center;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: var(--size-h3);
+  font-style: italic;
+}

@@ -1,0 +1,54 @@
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px 28px;
+  margin-top: 28px;
+}
+
+.toolbar__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* --tab-color is set inline to the tab's --status-* highlighter */
+.toolbar__tab {
+  padding: 7px 12px;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--text-primary);
+  font: var(--weight-medium) var(--size-body) var(--font-sans);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.toolbar__tab[aria-pressed='true'] {
+  background: var(--tab-color);
+}
+.toolbar__tab[aria-pressed='false']:hover {
+  background: color-mix(in srgb, var(--tab-color) var(--mix-tint), transparent);
+}
+.toolbar__tab[aria-pressed='true']:hover {
+  background: color-mix(in srgb, var(--tab-color) var(--mix-shade), var(--text-primary));
+}
+
+.toolbar__find {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.toolbar__search,
+.toolbar__sort {
+  padding: 9px 2px;
+  font: var(--size-body) var(--font-sans);
+}
+.toolbar__search {
+  width: 280px;
+}
+.toolbar__sort {
+  cursor: pointer;
+}

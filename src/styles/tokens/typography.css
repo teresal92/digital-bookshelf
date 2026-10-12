@@ -1,0 +1,45 @@
+:root{
+  /* Families: web font first, then a metric-similar system fallback that renders during load */
+  --font-blackletter:"Grenze Gotisch", Georgia, serif;
+  --font-display:"Instrument Serif", Georgia, serif;
+  --font-reading:"Young Serif",Charter, Georgia, serif;
+  --font-wordmark:"Berkshire Swash", "Iowan Old Style", Georgia, serif;
+  --font-sans:"Instrument Sans", ui-sans-serif, -apple-system, "Segoe UI", system-ui, sans-serif;
+
+  /* Product scale: minor third (×1.2) on an 18px body */
+  --size-label:13px;    /* uppercase labels, kickers */
+  --size-ui:15px;       /* buttons, chips, tags, small UI */
+  --size-body:18px;     /* reading text, fields, tabs */
+  --size-lead:22px;     /* quotes, bylines */
+  --size-accent:26px;   /* stars, numbers, cover title */
+  --size-h3:31px;
+  --size-h2:37px;
+  --size-title:clamp(45px, 5vw, 54px);
+  --size-wordmark:clamp(52px, 7vw, 96px);
+
+  /* Line heights */
+  --leading-tight:1;
+  --leading-title:.98;
+  --leading-heading:1.1;
+  --leading-ui:1.4;
+  --leading-body:1.6;
+  --leading-quote:1.7;
+
+  /* Weights (Instrument Sans) */
+  --weight-regular:400;
+  --weight-medium:500;
+  --weight-semibold:600;
+
+  /* Tracking */
+  --tracking-caps:.12em;  /* every uppercase label, kicker and tab */
+  --tracking-none:0;
+}
+
+/* Poster / editorial context only (specimen cards, print). Not used in the product. */
+.poster{
+  --poster-kicker:13px;
+  --poster-caption:15px;
+  --poster-quote:30px;
+  --poster-title:56px;
+  --poster-author:64px;
+}

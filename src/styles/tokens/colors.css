@@ -1,0 +1,110 @@
+/* =========================================================
+   Layer 1a — SHARED PRIMITIVES (same in every palette)
+   ========================================================= */
+:root{
+  --ink:#1D1A15;
+  --ink-muted:#5E574B;
+  --mark-brick:#9C3A2E;      /* destructive */
+  --taupe-100:#F1EEE9; --taupe-200:#E1DDD9; --taupe-300:#CDCAC5; --taupe-400:#BCB6AD; --taupe-500:#A3998A; --taupe-600:#82796A; --taupe-700:#655C4E; --taupe-800:#4C4436; --taupe-900:#352C20;
+  --lilac-100:#F8E9F6; --lilac-200:#ECD6E9; --lilac-300:#E0BEDC; --lilac-400:#D4A6CF; --lilac-500:#BA82B5; --lilac-600:#9A6595; --lilac-700:#7B4877; --lilac-800:#61305D; --lilac-900:#471744;
+}
+
+/* =========================================================
+   Layer 1b — PALETTE PRIMITIVES (bindings, marks, selection, paper, states)
+   ========================================================= */
+:root{
+  --binding-1:#4B5D6E; --binding-1-ink:#D3E6BF; /* Slate */
+  --binding-2:#9FC8CB; --binding-2-ink:#3E0B5B; /* Aqua */
+  --binding-3:#5A4635; --binding-3-ink:#F2E58A; /* Umber */
+  --binding-4:#D4A6CF; --binding-4-ink:#234423; /* Lilac */
+  --binding-5:#26452A; --binding-5-ink:#E7C4E2; /* Forest */
+  --binding-6:#3E1550; --binding-6-ink:#A9D8DC; /* Plum */
+  --mark-1:#F1E27A; --mark-2:#B5DB9C; --mark-3:#F0BF6A; --mark-4:#A8D6DA; --mark-5:#F2A6A4; --mark-6:#DFAEDF;
+  --select-1-bg:#D4A6CF; --select-1-text:#234423;
+  --select-2-bg:#3E1550; --select-2-text:#F2E58A;
+  --select-3-bg:#4B5D6E; --select-3-text:#D3E6BF;
+  --select-4-bg:#9FC8CB; --select-4-text:#3E0B5B;
+  --paper-page:#FFF8EC; --paper-card:#EEE9DD; --paper-deep:#E4DDCD; --paper-edge:#D9D1BF; --paper-shadow:#C9BFAA;
+  --palette-primary-hover:#26452A;
+  --palette-primary-press:#1A3220;
+  --palette-rating-filled:#F0BF6A;
+  --palette-rating-hover:#D9952F;
+  --palette-focus:var(--taupe-800);   /* kept from the accessibility fix; #DFAEDF is 1.77:1 */
+  --palette-scrim:rgba(46,24,52,.55);
+}
+
+/* =========================================================
+   Layer 2 — SEMANTIC. Components reference ONLY these
+   (plus --binding-{n} for per-book data).
+   ========================================================= */
+:root{
+  --surface-page:var(--paper-page);
+  --surface-sheet:var(--paper-card);
+  --surface-field:var(--paper-page);
+  --scrim:var(--palette-scrim);
+
+  --text-primary:var(--ink);
+  --text-secondary:var(--ink-muted);
+  --text-quiet:var(--taupe-700);
+  --text-on-primary:var(--paper-page);
+  --text-danger:var(--mark-brick);
+  --text-wordmark:var(--taupe-800);
+
+  --border-default:var(--paper-edge);
+  --border-field:var(--paper-edge);
+  --border-control:var(--taupe-600);
+
+  --focus-ring:var(--palette-focus);
+  --focus-halo:var(--paper-page);
+
+  --action-primary-bg:var(--ink);
+  --action-primary-fg:var(--text-on-primary);
+  --action-primary-hover:var(--palette-primary-hover);
+  --action-primary-press:var(--palette-primary-press);
+  --action-secondary-bg:transparent;
+  --action-secondary-fg:var(--ink-muted);
+  --action-secondary-border:var(--paper-edge);
+  --action-secondary-hover-bg:var(--paper-deep);
+  --action-secondary-hover-border:var(--taupe-600);
+  --action-secondary-hover-fg:var(--ink);
+  --action-secondary-press-bg:var(--paper-edge);
+  --action-solid-bg:var(--paper-card);
+
+  --selected-bg:var(--ink);
+  --selected-fg:var(--paper-page);
+  --selected-border:var(--ink);
+  --selected-ring:var(--border-control);
+
+  --status-all:var(--mark-1);
+  --status-read:var(--mark-2);
+  --status-reading:var(--mark-3);
+  --status-want:var(--mark-4);
+
+  --progress-track:var(--paper-deep);
+  --progress-fill:var(--action-primary-hover);  /* mark-2 fails 3:1 on the track in both palettes */
+  --progress-ribbon:var(--status-reading);
+
+  --rating-filled:var(--palette-rating-filled);
+  --rating-empty:var(--paper-edge);
+  --rating-hover:var(--palette-rating-hover);
+
+  --annotation-1:var(--mark-4);
+  --annotation-2:var(--mark-1);
+  --annotation-3:var(--mark-3);
+  --annotation-4:var(--mark-2);
+  --annotation-5:var(--mark-5);
+  --annotation-circle:var(--mark-6);
+
+  --selection-1-bg:var(--select-1-bg); --selection-1-fg:var(--select-1-text);
+  --selection-2-bg:var(--select-2-bg); --selection-2-fg:var(--select-2-text);
+  --selection-3-bg:var(--select-3-bg); --selection-3-fg:var(--select-3-text);
+  --selection-4-bg:var(--select-4-bg); --selection-4-fg:var(--select-4-text);
+
+  --shelf-top:var(--paper-edge);
+  --shelf-underside:var(--paper-shadow);
+  --slot-border:var(--border-control);      /* paper-shadow is 1.6:1, too faint for a control outline */
+  --slot-hover-bg:var(--paper-deep);
+
+  --scrollbar-thumb:var(--paper-edge);
+  --scrollbar-gap:var(--paper-card);
+}

@@ -1,0 +1,65 @@
+.add-form {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 44px 44px 36px;
+}
+
+.add-form__heading {
+  margin: 0 0 4px;
+  padding-right: 48px;
+  font-family: var(--font-display);
+  font-size: var(--size-h2);
+  font-weight: inherit;
+  line-height: 1;
+}
+
+.add-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Fields sit inside an uppercase .label, so undo its letter case and tracking */
+.add-form__input,
+.add-form__textarea {
+  letter-spacing: var(--tracking-none);
+  text-transform: none;
+}
+.add-form__input {
+  padding: 10px 2px;
+  font: var(--size-body) var(--font-sans);
+}
+.add-form__textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-field);
+  background: var(--surface-field);
+  color: var(--text-primary);
+  font: var(--size-body) / 1.6 var(--font-reading);
+  resize: vertical;
+}
+
+.add-form__statuses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.add-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-default);
+}
+.add-form__cancel {
+  padding: 8px 16px;
+  font-weight: var(--weight-medium);
+}

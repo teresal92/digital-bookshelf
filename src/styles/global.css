@@ -1,0 +1,214 @@
+/*
+ * Page-wide rules and the shared controls used by more than one component.
+ * Component-specific styles live next to each component.
+ *
+ * Interaction states: :active comes before :hover on purpose, so a mouse
+ * press keeps the hover color and only keyboard presses show the press color.
+ * On touch screens (hover: none), a press shows the hover color instead.
+ */
+
+/* ---- Page ---- */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--surface-page);
+  color: var(--text-primary);
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--action-primary-hover);
+}
+a:hover {
+  color: var(--text-primary);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
+  border: 3px solid var(--scrollbar-gap);
+}
+
+/* Text-selection color, chosen in the book dialog */
+[data-sel='lilac'] ::selection {
+  background: var(--selection-1-bg);
+  color: var(--selection-1-fg);
+}
+[data-sel='plum'] ::selection {
+  background: var(--selection-2-bg);
+  color: var(--selection-2-fg);
+}
+[data-sel='slate'] ::selection {
+  background: var(--selection-3-bg);
+  color: var(--selection-3-fg);
+}
+[data-sel='aqua'] ::selection {
+  background: var(--selection-4-bg);
+  color: var(--selection-4-fg);
+}
+
+/* ---- Base controls ---- */
+
+button {
+  transition-property: transform, scale, background, color, border-color, opacity;
+}
+button:focus {
+  outline: none;
+}
+button:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--focus-halo);
+}
+button:active:not(:disabled) {
+  scale: var(--scale-press);
+}
+button:disabled {
+  cursor: not-allowed;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+/* ---- Shared pieces ---- */
+
+/* Paper sheet behind both dialogs */
+.sheet {
+  background-color: var(--surface-sheet);
+  background-image: var(--texture-paper);
+  border-radius: var(--radius-sheet);
+  box-shadow: var(--shadow-sheet);
+}
+
+/* Small uppercase label above a field or group */
+.label {
+  font-size: var(--size-label);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* Underlined text field. Each use sets its own font and padding. */
+.field {
+  border: 0;
+  border-bottom: 1px solid var(--border-field);
+  background: transparent;
+  color: var(--text-primary);
+}
+
+/* ---- Buttons ---- */
+
+/* Outline pill. Each use sets its own padding. */
+.btn-secondary {
+  border: 1px solid var(--action-secondary-border);
+  border-radius: 999px;
+  background: var(--action-secondary-bg);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: var(--size-ui);
+  cursor: pointer;
+}
+
+/* Round × in a sheet's corner */
+.btn-close {
+  position: absolute;
+  z-index: 3;
+  top: 16px;
+  right: 22px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--action-secondary-border);
+  border-radius: 50%;
+  background: var(--action-solid-bg);
+  box-shadow: var(--shadow-control);
+  color: var(--text-primary);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Pill toggle (status, binding texture). Selected via aria-pressed. */
+.chip {
+  border: 1px solid var(--action-secondary-border);
+  border-radius: 999px;
+  background: var(--action-secondary-bg);
+  color: var(--action-secondary-fg);
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+}
+.chip[aria-pressed='true'] {
+  border-color: var(--selected-border);
+  background: var(--selected-bg);
+  color: var(--selected-fg);
+}
+.chip--status {
+  padding: 5px 12px;
+  font-size: var(--size-ui);
+  white-space: nowrap;
+}
+
+/* Shared states for the outline-style buttons */
+.btn-secondary:active,
+.btn-close:active,
+.chip[aria-pressed='false']:active {
+  background: var(--action-secondary-press-bg);
+}
+@media (hover: hover) {
+  .btn-secondary:hover,
+  .btn-close:hover,
+  .chip[aria-pressed='false']:hover {
+    border-color: var(--action-secondary-hover-border);
+    background: var(--action-secondary-hover-bg);
+    color: var(--action-secondary-hover-fg);
+  }
+}
+@media (hover: none) {
+  .btn-secondary:active,
+  .btn-close:active,
+  .chip[aria-pressed='false']:active {
+    background: var(--action-secondary-hover-bg);
+  }
+}
+
+/* Filled pill */
+.btn-primary {
+  padding: 8px 18px;
+  border: 1px solid var(--action-primary-bg);
+  border-radius: 999px;
+  background: var(--action-primary-bg);
+  color: var(--action-primary-fg);
+  font: var(--weight-medium) var(--size-ui) var(--font-sans);
+  cursor: pointer;
+}
+.btn-primary:disabled {
+  opacity: var(--opacity-disabled);
+}
+.btn-primary:not(:disabled):active {
+  border-color: var(--action-primary-press);
+  background: var(--action-primary-press);
+}
+@media (hover: hover) {
+  .btn-primary:not(:disabled):hover {
+    border-color: var(--action-primary-hover);
+    background: var(--action-primary-hover);
+  }
+}

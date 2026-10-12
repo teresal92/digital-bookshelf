@@ -1,0 +1,425 @@
+/*
+ * Open sequence: the scrim fades in (.book-modal--scrim), then at 280ms the
+ * card settles, the cover flips in and the details slide in (.book--revealed).
+ */
+
+.book-modal {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: opacity;
+}
+.book-modal--scrim {
+  opacity: 1;
+}
+
+.book {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 1180px;
+  overflow: hidden;
+  transform: translateY(40px) scale(0.94);
+  transition: transform 0.5s var(--ease-paper);
+}
+.book--revealed {
+  transform: translateY(0) scale(1);
+}
+
+.book__scroll {
+  --pad: clamp(24px, 4vw, 48px);
+  flex: 1;
+  min-width: 0;
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 56px;
+  /* Extra right padding keeps content clear of the × button */
+  padding: var(--pad) calc(var(--pad) + 36px) var(--pad) var(--pad);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+  scrollbar-gutter: stable;
+}
+
+/* ---- Left column: cover, prev/next, binding and highlight ---- */
+
+.book__aside {
+  flex: 0 0 auto;
+  margin: 0 auto;
+  perspective: 1200px;
+}
+
+/* Binding color and texture are set inline per book */
+.cover {
+  width: 280px;
+  height: 416px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 22px 18px;
+  border-radius: var(--radius-cover);
+  box-shadow: var(--shadow-cover-spine), var(--shadow-cover);
+  text-align: center;
+  transform: rotateY(-90deg) translateY(-40px);
+  transition: transform 0.7s var(--ease-paper);
+}
+.book--revealed .cover {
+  transform: rotateY(-16deg) rotateX(4deg);
+}
+.cover__author {
+  font-family: var(--font-blackletter);
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+  white-space: nowrap;
+  text-shadow: var(--emboss-cover);
+}
+.cover__window {
+  flex: 1;
+  width: 134px;
+  margin: 18px 0 16px;
+  border-radius: var(--radius-arch);
+  background: var(--fill-window);
+  box-shadow: var(--inset-window);
+}
+.cover__title {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: var(--size-accent);
+  line-height: var(--leading-title);
+  text-wrap: balance;
+  text-shadow: var(--emboss-cover);
+}
+
+.book__pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 22px;
+}
+.book__pager .btn-secondary {
+  flex: 1;
+  padding: 8px;
+}
+
+.book__look {
+  width: 280px;
+  margin-top: 28px;
+}
+.book__look-label {
+  margin-bottom: 8px;
+}
+.book__look-label--highlight {
+  margin-top: 18px;
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Binding (round) and highlight ("Aa") swatches. Colors come from inline --swatch-bg / --swatch-ink. */
+.swatch,
+.hl-swatch {
+  background: var(--swatch-bg);
+  box-shadow:
+    0 0 0 2px var(--surface-sheet),
+    0 0 0 3.5px transparent;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.swatch[aria-pressed='true'],
+.hl-swatch[aria-pressed='true'] {
+  box-shadow:
+    0 0 0 2px var(--surface-sheet),
+    0 0 0 3.5px var(--selected-ring);
+}
+.swatch {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 2px solid var(--swatch-ink);
+  border-radius: 50%;
+}
+.hl-swatch {
+  height: 26px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: 2px;
+  color: var(--swatch-ink);
+  font: var(--weight-medium) var(--size-label) var(--font-sans);
+}
+@media (hover: hover) {
+  .swatch:hover,
+  .hl-swatch:hover {
+    transform: scale(var(--scale-hover-swatch));
+  }
+}
+@media (pointer: coarse) {
+  .swatch {
+    width: 40px;
+    height: 40px;
+  }
+  .hl-swatch {
+    height: 40px;
+    padding: 0 12px;
+  }
+}
+
+.textures {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+.textures .chip {
+  flex: 1;
+  padding: 4px 10px;
+  font-size: var(--size-label);
+}
+
+/* ---- Right column: details ---- */
+
+.book__body {
+  flex: 1 1 380px;
+  min-width: 0;
+  opacity: 0;
+  transform: translateX(16px);
+  transition:
+    opacity 0.45s 0.15s,
+    transform 0.45s 0.15s;
+}
+.book--revealed .book__body {
+  opacity: 1;
+  transform: none;
+}
+
+.book__statuses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.book__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--size-title);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-title);
+  text-wrap: balance;
+}
+
+.book__byline {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 10px;
+}
+.book__by {
+  margin-right: -2px;
+  font-size: var(--size-label);
+  letter-spacing: var(--tracking-caps);
+}
+.book__author {
+  font-family: var(--font-display);
+  font-size: var(--size-lead);
+  font-style: italic;
+  line-height: 1;
+}
+
+/* Genre tags; highlighter color is set inline per genre */
+.book__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.book__tag {
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-size: var(--size-ui);
+}
+
+.book__synopsis,
+.book__quote {
+  font-family: var(--font-reading);
+  text-wrap: pretty;
+}
+.book__synopsis {
+  max-width: 65ch;
+  margin: 24px 0 0;
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+}
+.book__quote {
+  max-width: 60ch;
+  margin: 28px 0 0;
+  padding: 0;
+  font-size: var(--size-lead);
+  line-height: var(--leading-quote);
+}
+.book__quote-mark {
+  padding: 2px 3px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.book__rule {
+  height: 1px;
+  margin: 30px 0 24px;
+  background: var(--border-default);
+}
+
+.book__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 28px 44px;
+}
+.book__meta-label {
+  margin-bottom: 8px;
+}
+
+/* Rating */
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.star {
+  padding: 0 2px;
+  border: 0;
+  background: transparent;
+  color: var(--rating-empty);
+  font-size: var(--size-accent);
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    color 0.15s;
+}
+.star--filled {
+  color: var(--rating-filled);
+}
+@media (hover: hover) {
+  .star:hover {
+    color: var(--rating-hover);
+    transform: scale(var(--scale-hover-star));
+  }
+}
+@media (pointer: coarse) {
+  .star {
+    padding: 4px 6px;
+    font-size: 32px;
+  }
+}
+.stars__label {
+  margin-left: 10px;
+  color: var(--text-secondary);
+  font-size: var(--size-ui);
+}
+
+/* Finished date (books not being read) */
+.book__date {
+  padding: 6px 2px;
+  font: var(--size-ui) var(--font-sans);
+}
+
+/* Reading progress: an invisible range input over a styled track */
+.progress {
+  flex: 1 1 200px;
+  min-width: 180px;
+}
+.progress__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.progress__value {
+  font-family: var(--font-display);
+  font-size: var(--size-accent);
+  line-height: 1;
+}
+.progress__control {
+  position: relative;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+.progress__track {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  border-radius: var(--radius-mark);
+  background: var(--progress-track);
+}
+.progress__fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--progress-fill);
+}
+.progress__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Notes */
+.notes {
+  margin-top: 28px;
+}
+.notes__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.notes__saved {
+  color: var(--text-quiet);
+  font-size: var(--size-label);
+}
+.notes__input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-field);
+  background: var(--surface-field);
+  color: var(--text-primary);
+  font: var(--size-body) / 1.6 var(--font-sans);
+  resize: vertical;
+}
+
+/* Remove from shelf */
+.book__footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+.remove {
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  font: var(--weight-medium) var(--size-ui) var(--font-sans);
+  text-decoration: underline;
+  text-decoration-color: var(--border-default);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.remove--confirm {
+  color: var(--text-danger);
+}
+@media (hover: hover) {
+  .remove:hover {
+    color: var(--text-danger);
+  }
+}

@@ -1,0 +1,66 @@
+/* Size, binding color and texture are set inline per book */
+.spine {
+  position: relative;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-spine);
+  box-shadow: var(--shadow-spine);
+  cursor: pointer;
+  transition:
+    transform 0.4s var(--ease-paper),
+    opacity 0.3s;
+}
+/* Lifted out of the row while its book is open */
+.spine--open {
+  transform: translateY(var(--lift-spine-open)) rotate(-4deg);
+  opacity: var(--opacity-dimmed);
+}
+@media (hover: hover) {
+  .spine:hover {
+    transform: translateY(var(--lift-spine-hover));
+  }
+}
+@media (hover: none) {
+  .spine:active {
+    transform: translateY(var(--lift-spine-press));
+  }
+}
+
+/* Reading progress, filled from the bottom */
+.spine__ribbon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--progress-ribbon);
+}
+
+.spine__initials {
+  font-family: var(--font-blackletter);
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+}
+
+.spine__title,
+.spine__surname {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  line-height: 1;
+  white-space: nowrap;
+}
+.spine__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-display);
+}
+.spine__surname {
+  font-family: var(--font-blackletter);
+  font-weight: var(--weight-medium);
+  opacity: var(--opacity-spine-meta);
+}
