@@ -15,7 +15,6 @@ export interface BookCatalog {
   year: number;
   genres: string[];
   synopsis: string;
-  quote: string;
   /** Unscaled spine size in px. */
   spineWidth: number;
   spineHeight: number;
