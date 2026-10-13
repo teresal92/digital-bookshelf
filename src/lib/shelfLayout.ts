@@ -1,5 +1,5 @@
 import type { Book } from '../types';
-import { initials, lastName } from './book';
+import { initials, lastName, mainAuthor, spineSize } from './book';
 
 export interface ShelfMetrics {
   scale: number;
@@ -44,7 +44,7 @@ export function packShelves(books: Book[], containerWidth: number, m: ShelfMetri
   let row: Book[] = [];
   let used = m.slotWidth + Math.round(10 * m.scale);
   for (const b of books) {
-    const w = Math.round(b.spineWidth * m.scale) + m.gap;
+    const w = Math.round(spineSize(b).width * m.scale) + m.gap;
     if (row.length && used + w > avail) {
       shelves.push(row);
       row = [];
@@ -59,18 +59,21 @@ export function packShelves(books: Book[], containerWidth: number, m: ShelfMetri
 
 /** Sizes the title to fit the spine, leaving room for initials and surname. */
 export function spineMetrics(b: Book, scale: number, showAuthors: boolean): SpineMetrics {
-  const surname = lastName(b.author);
+  const { width, height } = spineSize(b);
+  const author = mainAuthor(b);
+  const surname = lastName(author);
+  const title = b.work.title;
   const reserved = showAuthors ? 110 + Math.ceil(surname.length * 10.5) : 40;
-  const titleMaxHeight = b.spineHeight - reserved;
-  const maxFs = b.spineWidth > 88 ? 34 : b.spineWidth > 76 ? 30 : 27;
-  const titleFontSize = Math.max(17, Math.min(maxFs, Math.floor(titleMaxHeight / (b.title.length * 0.42))));
+  const titleMaxHeight = height - reserved;
+  const maxFs = width > 88 ? 34 : width > 76 ? 30 : 27;
+  const titleFontSize = Math.max(17, Math.min(maxFs, Math.floor(titleMaxHeight / (title.length * 0.42))));
   return {
-    width: Math.round(b.spineWidth * scale),
-    height: Math.round(b.spineHeight * scale),
+    width: Math.round(width * scale),
+    height: Math.round(height * scale),
     titleFontSize: Math.round(titleFontSize * scale),
     titleMaxHeight: Math.round(titleMaxHeight * scale),
-    initialsFontSize: Math.round((b.spineWidth > 84 ? 32 : 27) * scale),
-    initials: initials(b.author),
+    initialsFontSize: Math.round((width > 84 ? 32 : 27) * scale),
+    initials: initials(author),
     surname,
   };
 }

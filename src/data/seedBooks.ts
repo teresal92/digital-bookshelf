@@ -1,5 +1,5 @@
-import type { Book, Rating, Status } from '../types';
 import { defaultLook } from '../lib/book';
+import type { Edition, Rating, ShelfEntry, Status, Work } from '../types';
 
 interface Seed {
   id: string;
@@ -13,11 +13,14 @@ interface Seed {
   dateRead: string;
   synopsis: string;
   progress?: number;
+  /** A typical edition's length; drives spine width. */
+  pageCount: number;
 }
 
 const SEEDS: Seed[] = [
   {
     id: "pride-and-prejudice",
+    pageCount: 432,
     title: "Pride and Prejudice",
     author: "Jane Austen",
     year: 1813,
@@ -30,6 +33,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "moby-dick",
+    pageCount: 635,
     title: "Moby-Dick",
     author: "Herman Melville",
     year: 1851,
@@ -42,6 +46,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "frankenstein",
+    pageCount: 280,
     title: "Frankenstein",
     author: "Mary Shelley",
     year: 1818,
@@ -54,6 +59,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "middlemarch",
+    pageCount: 880,
     title: "Middlemarch",
     author: "George Eliot",
     year: 1871,
@@ -67,6 +73,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "the-odyssey",
+    pageCount: 541,
     title: "The Odyssey",
     author: "Homer",
     year: -700,
@@ -79,6 +86,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "jane-eyre",
+    pageCount: 532,
     title: "Jane Eyre",
     author: "Charlotte Brontë",
     year: 1847,
@@ -91,6 +99,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "crime-and-punishment",
+    pageCount: 671,
     title: "Crime and Punishment",
     author: "Fyodor Dostoevsky",
     year: 1866,
@@ -103,6 +112,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "the-picture-of-dorian-gray",
+    pageCount: 254,
     title: "The Picture of Dorian Gray",
     author: "Oscar Wilde",
     year: 1890,
@@ -115,6 +125,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "little-women",
+    pageCount: 759,
     title: "Little Women",
     author: "Louisa May Alcott",
     year: 1868,
@@ -127,6 +138,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "dracula",
+    pageCount: 418,
     title: "Dracula",
     author: "Bram Stoker",
     year: 1897,
@@ -139,6 +151,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "wuthering-heights",
+    pageCount: 416,
     title: "Wuthering Heights",
     author: "Emily Brontë",
     year: 1847,
@@ -151,6 +164,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "anna-karenina",
+    pageCount: 864,
     title: "Anna Karenina",
     author: "Leo Tolstoy",
     year: 1878,
@@ -163,6 +177,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "the-count-of-monte-cristo",
+    pageCount: 1276,
     title: "The Count of Monte Cristo",
     author: "Alexandre Dumas",
     year: 1844,
@@ -175,6 +190,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "great-expectations",
+    pageCount: 505,
     title: "Great Expectations",
     author: "Charles Dickens",
     year: 1861,
@@ -188,6 +204,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "the-brothers-karamazov",
+    pageCount: 796,
     title: "The Brothers Karamazov",
     author: "Fyodor Dostoevsky",
     year: 1880,
@@ -200,6 +217,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "walden",
+    pageCount: 352,
     title: "Walden",
     author: "Henry David Thoreau",
     year: 1854,
@@ -212,6 +230,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "emma",
+    pageCount: 474,
     title: "Emma",
     author: "Jane Austen",
     year: 1815,
@@ -224,6 +243,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "don-quixote",
+    pageCount: 1072,
     title: "Don Quixote",
     author: "Miguel de Cervantes",
     year: 1605,
@@ -236,6 +256,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "the-time-machine",
+    pageCount: 118,
     title: "The Time Machine",
     author: "H. G. Wells",
     year: 1895,
@@ -248,6 +269,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "les-miserables",
+    pageCount: 1463,
     title: "Les Misérables",
     author: "Victor Hugo",
     year: 1862,
@@ -261,6 +283,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "heart-of-darkness",
+    pageCount: 96,
     title: "Heart of Darkness",
     author: "Joseph Conrad",
     year: 1899,
@@ -273,6 +296,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "the-scarlet-letter",
+    pageCount: 272,
     title: "The Scarlet Letter",
     author: "Nathaniel Hawthorne",
     year: 1850,
@@ -285,6 +309,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "a-tale-of-two-cities",
+    pageCount: 489,
     title: "A Tale of Two Cities",
     author: "Charles Dickens",
     year: 1859,
@@ -297,6 +322,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "persuasion",
+    pageCount: 249,
     title: "Persuasion",
     author: "Jane Austen",
     year: 1817,
@@ -309,6 +335,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "the-metamorphosis",
+    pageCount: 70,
     title: "The Metamorphosis",
     author: "Franz Kafka",
     year: 1915,
@@ -321,6 +348,7 @@ const SEEDS: Seed[] = [
   },
   {
     id: "treasure-island",
+    pageCount: 311,
     title: "Treasure Island",
     author: "Robert Louis Stevenson",
     year: 1883,
@@ -329,13 +357,52 @@ const SEEDS: Seed[] = [
     rating: 0,
     notes: "",
     dateRead: "",
+
     synopsis: "Young Jim Hawkins finds a treasure map and sails with a crew that includes the charming, treacherous cook Long John Silver.",
   },
 ];
 
-/** The sample library. Ids are stable; never renumber them. */
-export const SEED_BOOKS: Book[] = SEEDS.map(({ progress = 0, ...seed }, index) => ({
-  ...seed,
-  progress,
-  ...defaultLook(seed.title, index),
-}));
+/** The sample library as database rows. Entry ids are stable; never renumber them. */
+export function seedRows(): { works: Work[]; editions: Edition[]; entries: ShelfEntry[] } {
+  const works: Work[] = [];
+  const editions: Edition[] = [];
+  const entries: ShelfEntry[] = [];
+  SEEDS.forEach((seed, index) => {
+    const catalogId = `seed:${seed.id}`;
+    // Seeds sort before anything the reader adds, in seed order.
+    const addedAt = new Date(index).toISOString();
+    works.push({
+      id: catalogId,
+      source: 'seed',
+      title: seed.title,
+      authors: [seed.author],
+      firstPublishYear: seed.year,
+      subjects: seed.genres,
+      description: seed.synopsis,
+      fetchedAt: addedAt,
+    });
+    editions.push({
+      id: catalogId,
+      workId: catalogId,
+      source: 'seed',
+      title: seed.title,
+      publishers: [],
+      pageCount: seed.pageCount,
+      fetchedAt: addedAt,
+    });
+    entries.push({
+      id: seed.id,
+      workId: catalogId,
+      editionId: catalogId,
+      status: seed.status,
+      rating: seed.rating,
+      notes: seed.notes,
+      dateRead: seed.dateRead,
+      progress: seed.progress ?? 0,
+      ...defaultLook(seed.title, index),
+      addedAt,
+      updatedAt: addedAt,
+    });
+  });
+  return { works, editions, entries };
+}

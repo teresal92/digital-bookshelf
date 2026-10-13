@@ -1,4 +1,4 @@
-import { bindingColors, textureImage } from '../lib/book';
+import { authorLine, bindingColors, textureImage } from '../lib/book';
 import type { SpineMetrics } from '../lib/shelfLayout';
 import type { Book } from '../types';
 import './Spine.css';
@@ -15,7 +15,7 @@ interface Props {
 /** A cloth or leather spine: initials, title, surname, and a progress ribbon while reading. */
 export function Spine({ book, metrics: m, surnameFontSize, showAuthors, open, onOpen }: Props) {
   const { bg, ink } = bindingColors(book.binding);
-  const tip = `${book.title} — ${book.author}`;
+  const tip = `${book.work.title} — ${authorLine(book)}`;
 
   return (
     <button
@@ -41,7 +41,7 @@ export function Spine({ book, metrics: m, surnameFontSize, showAuthors, open, on
         </div>
       )}
       <div className="spine__title" style={{ fontSize: m.titleFontSize, maxHeight: m.titleMaxHeight }}>
-        {book.title}
+        {book.work.title}
       </div>
       {showAuthors && (
         <div className="spine__surname" style={{ fontSize: surnameFontSize }}>
