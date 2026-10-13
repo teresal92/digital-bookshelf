@@ -4,7 +4,7 @@ import { useLibrary } from '../hooks/useLibrary';
 import { useOpenBook } from '../hooks/useOpenBook';
 import { usePersistentState } from '../hooks/usePersistentState';
 import { visibleBooks } from '../lib/filter';
-import type { BookDraft, FilterTab, SelectionTheme, SortKey } from '../types';
+import type { Book, BookDraft, FilterTab, SelectionTheme, SortKey } from '../types';
 import { AddBookForm } from './AddBookForm';
 import { BookDialog } from './BookDialog';
 import { Shelves } from './Shelves';
@@ -20,12 +20,15 @@ export interface LibraryProps {
   selectionColor?: SelectionTheme;
 }
 
+const NO_BOOKS: Book[] = [];
+
 export function Library({
   bookSize = 1,
   showAuthors = true,
   selectionColor = 'lilac',
 }: LibraryProps) {
-  const { books, updateBook, addBook, removeBook } = useLibrary();
+  const { books: loaded, updateBook, addBook, removeBook } = useLibrary();
+  const books = loaded ?? NO_BOOKS;
   const [tab, setTab] = useState<FilterTab>('all');
   const [query, setQuery] = useState('');
   const [sort, setSort] = useState<SortKey>('shelf');
@@ -53,8 +56,14 @@ export function Library({
     onNext: () => stepBy(1),
   });
 
-  const handleAdd = (draft: BookDraft) => {
-    const id = addBook(draft);
+  const handleAdd = async (draft: BookDraft) => {
+    let id: string;
+    try {
+      id = await addBook(draft);
+    } catch (err) {
+      console.error('Library: add failed', err);
+      return;
+    }
     setAdding(false);
     setTab('all');
     setQuery('');
@@ -80,14 +89,16 @@ export function Library({
               onSort={setSort}
             />
           </header>
-          <Shelves
-            books={visible}
-            bookSize={bookSize}
-            showAuthors={showAuthors}
-            openId={openBook.id}
-            onOpen={openBook.open}
-            onAdd={() => setAdding(true)}
-          />
+          {loaded && (
+            <Shelves
+              books={visible}
+              bookSize={bookSize}
+              showAuthors={showAuthors}
+              openId={openBook.id}
+              onOpen={openBook.open}
+              onAdd={() => setAdding(true)}
+            />
+          )}
         </div>
       </div>
 

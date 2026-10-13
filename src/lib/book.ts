@@ -1,4 +1,4 @@
-import type { Binding, Rating, SelectionTheme, Status, Texture } from '../types';
+import type { Binding, Book, Rating, SelectionTheme, Status, Texture } from '../types';
 
 /** Order matters: index + 1 is the --binding-{n} token slot. */
 export const BINDINGS: { key: Binding; label: string }[] = [
@@ -77,17 +77,45 @@ export function initials(author: string): string {
 }
 
 /**
- * Default spine size, binding and texture. `index` is the book's position in
- * the full catalog (seeds first, then added books) at creation time.
+ * Default binding and texture for a new shelf entry. `index` is the entry's
+ * position on the shelf at creation time.
  */
-export function defaultLook(title: string, index: number) {
+export function defaultLook(title: string, index: number): { binding: Binding; texture: Texture } {
   const h = hash(title);
   return {
     binding: BINDINGS[(index * 5 + h) % BINDINGS.length]!.key,
-    texture: ((h >> 5) % 2 ? 'leather' : 'linen') as Texture,
-    spineWidth: 66 + (h % 34),
-    spineHeight: 370 + ((h >> 3) % 100),
+    texture: (h >> 5) % 2 ? 'leather' : 'linen',
   };
+}
+
+const MIN_WIDTH = 66;
+const MAX_WIDTH = 99;
+const THIN_PAGES = 80;
+const THICK_PAGES = 1200;
+
+/**
+ * Unscaled spine size in px. Never stored: width follows the edition's page
+ * count (square-root scale, so mid-length books still differ), falling back
+ * to a title hash; height is always the title hash.
+ */
+export function spineSize(book: Book): { width: number; height: number } {
+  const h = hash(book.work.title);
+  const pages = book.edition.pageCount;
+  let width = MIN_WIDTH + (h % (MAX_WIDTH - MIN_WIDTH + 1));
+  if (pages) {
+    const t = (Math.sqrt(pages) - Math.sqrt(THIN_PAGES)) / (Math.sqrt(THICK_PAGES) - Math.sqrt(THIN_PAGES));
+    width = Math.round(MIN_WIDTH + Math.min(1, Math.max(0, t)) * (MAX_WIDTH - MIN_WIDTH));
+  }
+  return { width, height: 370 + ((h >> 3) % 100) };
+}
+
+/** First author, or '' when the catalog has none. */
+export function mainAuthor(book: Book): string {
+  return book.work.authors[0] ?? '';
+}
+
+export function authorLine(book: Book): string {
+  return book.work.authors.join(', ');
 }
 
 export function today(): string {

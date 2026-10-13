@@ -5,10 +5,14 @@ export function visibleBooks(books: Book[], tab: FilterTab, query: string, sort:
   const v = books.filter(
     (b) =>
       (tab === 'all' || b.status === tab) &&
-      (!q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q)),
+      (!q ||
+        b.work.title.toLowerCase().includes(q) ||
+        b.work.authors.some((a) => a.toLowerCase().includes(q))),
   );
   if (sort === 'rating') return v.sort((a, b) => b.rating - a.rating);
-  if (sort === 'title') return v.sort((a, b) => a.title.localeCompare(b.title));
-  if (sort === 'year') return v.sort((a, b) => a.year - b.year);
+  if (sort === 'title') return v.sort((a, b) => a.work.title.localeCompare(b.work.title));
+  // Unknown years sort last.
+  if (sort === 'year')
+    return v.sort((a, b) => (a.work.firstPublishYear ?? Infinity) - (b.work.firstPublishYear ?? Infinity));
   return v;
 }

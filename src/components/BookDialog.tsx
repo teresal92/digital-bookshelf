@@ -7,12 +7,14 @@ import {
   STATUS_LABELS,
   TEXTURES,
   bindingColors,
+  authorLine,
   lastName,
+  mainAuthor,
   markFor,
   textureImage,
   today,
 } from '../lib/book';
-import type { Book, BookPersonal, Rating, SelectionTheme, Status } from '../types';
+import type { Book, Rating, SelectionTheme, ShelfFields, Status } from '../types';
 import { Modal } from './Modal';
 import './BookDialog.css';
 
@@ -27,7 +29,7 @@ interface Props {
   revealed: boolean;
   selectionTheme: SelectionTheme;
   onSelectionTheme: (theme: SelectionTheme) => void;
-  onUpdate: (patch: Partial<BookPersonal>) => void;
+  onUpdate: (patch: Partial<ShelfFields>) => void;
   onRemove: () => void;
   onPrev: () => void;
   onNext: () => void;
@@ -49,13 +51,13 @@ export function BookDialog({
 }: Props) {
   const titleId = useId();
   const [saved, flashSaved] = useTransientFlag(1400);
-  const update = (patch: Partial<BookPersonal>) => {
+  const update = (patch: Partial<ShelfFields>) => {
     onUpdate(patch);
     flashSaved();
   };
 
   const { bg, ink } = bindingColors(book.binding);
-  const surname = lastName(book.author);
+  const surname = lastName(mainAuthor(book));
   const coverAuthorSize = surname.length > 9 ? 36 : surname.length > 6 ? 44 : 54;
 
   return (
@@ -79,7 +81,7 @@ export function BookDialog({
                 {surname}
               </div>
               <div className="cover__window" />
-              <div className="cover__title">{book.title}</div>
+              <div className="cover__title">{book.work.title}</div>
             </div>
             <div className="book__pager">
               <button type="button" className="btn-secondary" onClick={onPrev}>
@@ -161,20 +163,20 @@ export function BookDialog({
               ))}
             </div>
             <h2 id={titleId} className="book__title">
-              {book.title}
+              {book.work.title}
             </h2>
             <div className="book__byline">
               <span className="book__by">BY</span>
-              <span className="book__author">{book.author}</span>
+              <span className="book__author">{authorLine(book)}</span>
             </div>
             <div className="book__tags">
-              {book.genres.map((g) => (
+              {book.work.subjects.map((g) => (
                 <span key={g} className="book__tag" style={{ background: markFor(g) }}>
                   {g}
                 </span>
               ))}
             </div>
-            <p className="book__synopsis">{book.synopsis}</p>
+            <p className="book__synopsis">{book.work.description}</p>
 
             <div className="book__rule" />
 
