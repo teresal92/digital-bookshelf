@@ -16,8 +16,6 @@ export interface LibraryProps {
   bookSize?: number;
   /** Initials and surnames on the spines. */
   showAuthors?: boolean;
-  /** Marker highlight behind quotes. */
-  highlightQuotes?: boolean;
   /** Text-selection color until the reader picks one. */
   selectionColor?: SelectionTheme;
 }
@@ -25,7 +23,6 @@ export interface LibraryProps {
 export function Library({
   bookSize = 1,
   showAuthors = true,
-  highlightQuotes = true,
   selectionColor = 'lilac',
 }: LibraryProps) {
   const { books, updateBook, addBook, removeBook } = useLibrary();
@@ -99,7 +96,6 @@ export function Library({
           book={selected}
           scrimShown={openBook.scrim}
           revealed={openBook.revealed}
-          highlightQuotes={highlightQuotes}
           selectionTheme={selTheme ?? selectionColor}
           onSelectionTheme={setSelTheme}
           onUpdate={(patch) => updateBook(selected.id, patch)}

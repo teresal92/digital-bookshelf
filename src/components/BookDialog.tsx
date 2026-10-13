@@ -25,7 +25,6 @@ interface Props {
   scrimShown: boolean;
   /** Card, cover and details in their final position. */
   revealed: boolean;
-  highlightQuotes: boolean;
   selectionTheme: SelectionTheme;
   onSelectionTheme: (theme: SelectionTheme) => void;
   onUpdate: (patch: Partial<BookPersonal>) => void;
@@ -40,7 +39,6 @@ export function BookDialog({
   book,
   scrimShown,
   revealed,
-  highlightQuotes,
   selectionTheme,
   onSelectionTheme,
   onUpdate,
@@ -177,18 +175,6 @@ export function BookDialog({
               ))}
             </div>
             <p className="book__synopsis">{book.synopsis}</p>
-            {book.quote && (
-              <blockquote className="book__quote">
-                “
-                <span
-                  className="book__quote-mark"
-                  style={{ background: highlightQuotes ? markFor(book.title) : 'transparent' }}
-                >
-                  {book.quote}
-                </span>
-                ”
-              </blockquote>
-            )}
 
             <div className="book__rule" />
 

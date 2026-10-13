@@ -11,7 +11,6 @@ interface Seed {
   rating: Rating;
   notes: string;
   dateRead: string;
-  quote: string;
   synopsis: string;
   progress?: number;
 }
@@ -27,7 +26,6 @@ const SEEDS: Seed[] = [
     rating: 5,
     notes: "Reread every few years. Elizabeth's wit lands differently each time; this time I noticed how much of the plot is driven by Mrs. Bennet's anxiety.",
     dateRead: "2026-02-14",
-    quote: "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.",
     synopsis: "Elizabeth Bennet navigates family pressure, first impressions and her own pride as she is drawn into a slow, prickly courtship with the reserved Mr. Darcy.",
   },
   {
@@ -40,7 +38,6 @@ const SEEDS: Seed[] = [
     rating: 4,
     notes: "The whaling chapters are a slog but the sermon and the final three days are unforgettable.",
     dateRead: "2025-08-03",
-    quote: "Call me Ishmael.",
     synopsis: "Ishmael signs onto the whaler Pequod and discovers that Captain Ahab has one purpose: hunting the white whale that took his leg.",
   },
   {
@@ -53,7 +50,6 @@ const SEEDS: Seed[] = [
     rating: 5,
     notes: "The creature is the most eloquent person in the book.",
     dateRead: "2025-10-30",
-    quote: "Beware; for I am fearless, and therefore powerful.",
     synopsis: "A young scientist animates a body assembled from the dead, then abandons his creation, setting both on a path of grief and revenge.",
   },
   {
@@ -66,7 +62,6 @@ const SEEDS: Seed[] = [
     rating: 0,
     notes: "Halfway. Dorothea and Casaubon are painful to watch.",
     dateRead: "",
-    quote: "",
     synopsis: "A panoramic study of a provincial English town, following idealistic Dorothea Brooke, the ambitious doctor Lydgate and the quiet compromises of ordinary lives.",
     progress: 48,
   },
@@ -80,7 +75,6 @@ const SEEDS: Seed[] = [
     rating: 4,
     notes: "",
     dateRead: "2024-06-21",
-    quote: "",
     synopsis: "After the fall of Troy, Odysseus spends ten years fighting gods, monsters and temptation on his way home to Ithaca, where suitors besiege his wife.",
   },
   {
@@ -93,7 +87,6 @@ const SEEDS: Seed[] = [
     rating: 5,
     notes: "Jane's insistence on her own worth still feels radical.",
     dateRead: "2025-01-11",
-    quote: "I am no bird; and no net ensnares me.",
     synopsis: "An orphaned governess takes a post at Thornfield Hall and falls for its brooding master, whose house hides a dangerous secret.",
   },
   {
@@ -106,7 +99,6 @@ const SEEDS: Seed[] = [
     rating: 0,
     notes: "",
     dateRead: "",
-    quote: "",
     synopsis: "A destitute former student commits a murder he believes is justified, then unravels under guilt and the patient attention of a detective.",
   },
   {
@@ -119,7 +111,6 @@ const SEEDS: Seed[] = [
     rating: 3,
     notes: "Lord Henry gets all the best lines. The middle drags.",
     dateRead: "2024-11-02",
-    quote: "",
     synopsis: "A beautiful young man wishes his portrait would age instead of him, and indulges every vice while the painting records his corruption.",
   },
   {
@@ -132,7 +123,6 @@ const SEEDS: Seed[] = [
     rating: 4,
     notes: "",
     dateRead: "2023-12-20",
-    quote: "",
     synopsis: "The four March sisters grow up in Civil War-era Massachusetts, each wrestling with ambition, love and duty in her own way.",
   },
   {
@@ -145,7 +135,6 @@ const SEEDS: Seed[] = [
     rating: 0,
     notes: "",
     dateRead: "",
-    quote: "",
     synopsis: "Told through letters and diaries, a group of friends pursue an ancient Transylvanian count who has arrived in England hungry for blood.",
   },
   {
@@ -158,7 +147,6 @@ const SEEDS: Seed[] = [
     rating: 4,
     notes: "Everyone is awful and I couldn't stop reading.",
     dateRead: "2025-03-09",
-    quote: "Whatever our souls are made of, his and mine are the same.",
     synopsis: "On the Yorkshire moors, the foundling Heathcliff and Catherine Earnshaw share a consuming bond that poisons two families across generations.",
   },
   {
@@ -171,7 +159,6 @@ const SEEDS: Seed[] = [
     rating: 0,
     notes: "",
     dateRead: "",
-    quote: "",
     synopsis: "A Russian aristocrat leaves her marriage for a cavalry officer, while the landowner Levin searches for meaning in farming, faith and family.",
   },
   {
@@ -184,7 +171,6 @@ const SEEDS: Seed[] = [
     rating: 5,
     notes: "Best revenge plot ever written. The Château d'If section alone is worth it.",
     dateRead: "2024-04-18",
-    quote: "All human wisdom is contained in these two words: wait and hope.",
     synopsis: "Wrongly imprisoned for fourteen years, Edmond Dantès escapes, finds a buried fortune and returns to Paris under a new identity to repay his betrayers.",
   },
   {
@@ -197,7 +183,6 @@ const SEEDS: Seed[] = [
     rating: 0,
     notes: "",
     dateRead: "",
-    quote: "",
     synopsis: "The orphan Pip receives a mysterious fortune and leaves the marshes for London, learning slowly what he owes and to whom.",
     progress: 22,
   },
@@ -211,7 +196,6 @@ const SEEDS: Seed[] = [
     rating: 0,
     notes: "",
     dateRead: "",
-    quote: "",
     synopsis: "Three brothers and their dissolute father are pulled into a murder case that becomes an argument about faith, freedom and responsibility.",
   },
   {
@@ -224,7 +208,6 @@ const SEEDS: Seed[] = [
     rating: 3,
     notes: "Good in small doses, ideally outside.",
     dateRead: "2025-06-15",
-    quote: "",
     synopsis: "Thoreau's account of two years living simply in a cabin by Walden Pond, mixing natural observation with arguments for self-reliance.",
   },
   {
@@ -237,7 +220,6 @@ const SEEDS: Seed[] = [
     rating: 4,
     notes: "",
     dateRead: "2024-09-01",
-    quote: "",
     synopsis: "Handsome, clever and rich, Emma Woodhouse meddles in her neighbours' love lives with confidence that far outpaces her judgment.",
   },
   {
@@ -250,7 +232,6 @@ const SEEDS: Seed[] = [
     rating: 0,
     notes: "",
     dateRead: "",
-    quote: "",
     synopsis: "A gentleman who has read too many chivalric romances sets out as a knight-errant with his practical squire Sancho Panza.",
   },
   {
@@ -263,7 +244,6 @@ const SEEDS: Seed[] = [
     rating: 4,
     notes: "Short and strange. The ending stays with you.",
     dateRead: "2025-09-12",
-    quote: "",
     synopsis: "A Victorian inventor travels to the year 802,701 and finds humanity split into two species.",
   },
   {
@@ -276,7 +256,6 @@ const SEEDS: Seed[] = [
     rating: 0,
     notes: "Skipping the Waterloo digression. No regrets.",
     dateRead: "",
-    quote: "",
     synopsis: "Ex-convict Jean Valjean tries to build an honest life while the relentless Inspector Javert pursues him through decades of French upheaval.",
     progress: 65,
   },
@@ -290,7 +269,6 @@ const SEEDS: Seed[] = [
     rating: 3,
     notes: "",
     dateRead: "2023-07-04",
-    quote: "",
     synopsis: "Sailor Charles Marlow recounts his journey up the Congo River in search of Kurtz, an ivory trader who has gone beyond all restraint.",
   },
   {
@@ -303,7 +281,6 @@ const SEEDS: Seed[] = [
     rating: 0,
     notes: "",
     dateRead: "",
-    quote: "",
     synopsis: "In Puritan Boston, Hester Prynne is forced to wear a scarlet A and raises her daughter while refusing to name the child's father.",
   },
   {
@@ -316,7 +293,6 @@ const SEEDS: Seed[] = [
     rating: 4,
     notes: "",
     dateRead: "2024-01-27",
-    quote: "It was the best of times, it was the worst of times.",
     synopsis: "Lives in London and Paris become entangled in the lead-up to and terror of the French Revolution.",
   },
   {
@@ -329,7 +305,6 @@ const SEEDS: Seed[] = [
     rating: 5,
     notes: "My favourite Austen. The letter scene.",
     dateRead: "2025-12-05",
-    quote: "You pierce my soul. I am half agony, half hope.",
     synopsis: "Eight years after being persuaded to break off her engagement, Anne Elliot meets Captain Wentworth again.",
   },
   {
@@ -342,7 +317,6 @@ const SEEDS: Seed[] = [
     rating: 4,
     notes: "",
     dateRead: "2025-05-22",
-    quote: "",
     synopsis: "Travelling salesman Gregor Samsa wakes to find himself transformed into an enormous insect, and his family's patience slowly wears thin.",
   },
   {
@@ -355,7 +329,6 @@ const SEEDS: Seed[] = [
     rating: 0,
     notes: "",
     dateRead: "",
-    quote: "",
     synopsis: "Young Jim Hawkins finds a treasure map and sails with a crew that includes the charming, treacherous cook Long John Silver.",
   },
 ];

@@ -241,28 +241,13 @@
   font-size: var(--size-ui);
 }
 
-.book__synopsis,
-.book__quote {
+.book__synopsis {
   font-family: var(--font-reading);
   text-wrap: pretty;
-}
-.book__synopsis {
   max-width: 65ch;
   margin: 24px 0 0;
   font-size: var(--size-body);
   line-height: var(--leading-body);
-}
-.book__quote {
-  max-width: 60ch;
-  margin: 28px 0 0;
-  padding: 0;
-  font-size: var(--size-lead);
-  line-height: var(--leading-quote);
-}
-.book__quote-mark {
-  padding: 2px 3px;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
 }
 
 .book__rule {

@@ -62,7 +62,6 @@ export function useLibrary() {
             .map((t) => t.trim())
             .filter(Boolean),
           synopsis: draft.synopsis.trim(),
-          quote: '',
           spineWidth,
           spineHeight,
           binding,
